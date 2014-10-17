@@ -5,6 +5,7 @@ public class User{
 	private String login;
 	private String userName;
 	public long getUserId(){
+        ///
 		return userId;
 	}
 	public String getLogin(){
