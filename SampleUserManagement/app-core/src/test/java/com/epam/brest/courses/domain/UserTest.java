@@ -12,6 +12,7 @@ public class UserTest extends TestCase {
 
     @Before
     public void setUp() throws Exception {
+        //
         user = new User();
     }
     @Test
