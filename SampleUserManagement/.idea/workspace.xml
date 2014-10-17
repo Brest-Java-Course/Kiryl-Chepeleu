@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a77339fc-055c-4013-91c0-7d6a7896cca1" name="Default" comment="" />
+    <list default="true" id="a77339fc-055c-4013-91c0-7d6a7896cca1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-core/src/main/java/com/epam/brest/courses/domain/User.java" afterPath="$PROJECT_DIR$/app-core/src/main/java/com/epam/brest/courses/domain/User.java" />
+    </list>
     <ignored mask="*.iml" />
     <ignored path=".idea/" />
     <ignored path=".idea/.name" />
@@ -27,11 +29,11 @@
       <file leaf-file-name="User.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app-core/src/main/java/com/epam/brest/courses/domain/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57377046" vertical-offset="0" max-vertical-offset="345">
-              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.24249423" vertical-offset="0" max-vertical-offset="433">
+              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
               <folding>
-                <element signature="e#213#214#0" expanded="true" />
-                <element signature="e#232#233#0" expanded="true" />
+                <element signature="e#217#218#0" expanded="true" />
+                <element signature="e#236#237#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -389,7 +391,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.54347825" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54347825" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32826087" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -458,11 +460,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app-core/src/main/java/com/epam/brest/courses/domain/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57377046" vertical-offset="0" max-vertical-offset="345">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.24249423" vertical-offset="0" max-vertical-offset="433">
+          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
           <folding>
-            <element signature="e#213#214#0" expanded="true" />
-            <element signature="e#232#233#0" expanded="true" />
+            <element signature="e#217#218#0" expanded="true" />
+            <element signature="e#236#237#0" expanded="true" />
           </folding>
         </state>
       </provider>
