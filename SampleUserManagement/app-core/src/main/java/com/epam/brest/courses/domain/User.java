@@ -5,7 +5,6 @@ public class User{
 	private String login;
 	private String userName;
 	public long getUserId(){
-        ///****
 		return userId;
 	}
 	public String getLogin(){
@@ -20,7 +19,7 @@ public class User{
 	public void setLogin(String login){
 		this.login=login;
 	}
-	public void setUserId(String userName){
+	public void setUserName(String userName){
 		this.userName=userName;
 	}
 }
