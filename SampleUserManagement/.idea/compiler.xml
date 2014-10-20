@@ -23,6 +23,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="app-core" />
+        <module name="app-dao" />
       </profile>
     </annotationProcessing>
   </component>
