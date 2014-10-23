@@ -28,6 +28,7 @@ public class UserDaoImplTest {
         List<User> users=userDao.getUsers();
         assertNotNull(users);
     }
+    @Test
     public void addUser(){
         List<User> users = userDao.getUsers();
         int sizeBefore = users.size();
@@ -37,6 +38,14 @@ public class UserDaoImplTest {
         user.setUserName("userName3");
         userDao.addUser(user);
         users = userDao.getUsers();
-        assertEquals(sizeBefore,users.size());
+        assertEquals(sizeBefore,users.size()-1);
+    }
+    @Test
+    public void removeUser(){
+        List<User> users = userDao.getUsers();
+        int sizeBefore = users.size();
+        userDao.removeUser(1);
+        users = userDao.getUsers();
+        assertEquals(sizeBefore-1,users.size());
     }
 }

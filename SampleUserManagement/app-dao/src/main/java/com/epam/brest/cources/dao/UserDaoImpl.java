@@ -19,24 +19,24 @@ public class UserDaoImpl implements UserDao{
     }
     @Override
     public List<User> getUsers() {
-        return jdbcTemplate.query("SELECT userid, login, name FROM USER", new UserMapper());
+        return jdbcTemplate.query("SELECT userId, login, name FROM USER", new UserMapper());
     }
 
     @Override
     public void removeUser(long userId) {
-
+        jdbcTemplate.update("DELETE FROM USER WHERE userId=?",userId);
     }
 
     @Override
     public void addUser(User user) {
-        jdbcTemplate.update("INSERT INTO USER (userid,login,name)=(?,?,?)",
+        jdbcTemplate.update("INSERT INTO USER (userId,login,name) values (?,?,?)",
                             user.getUserId(),user.getLogin(),user.getUserName());
     }
     public class UserMapper implements RowMapper<User> {
 
         public User mapRow(ResultSet rs,int i)throws SQLException{
             User user=new User();
-            user.setUserId(rs.getLong("userid"));
+            user.setUserId(rs.getLong("userId"));
             user.setLogin(rs.getString("login"));
             user.setUserName(rs.getString("name"));
             return user;
