@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
     public static final String ADD_NEW_USER_SQL = "insert into USER (userid, login, name) values (:userid, :login, :name)";
 
 
-    public static final String DELETE_USER_SQL = "delete from USER where user_id = ?";
+    public static final String DELETE_USER_SQL = "delete from USER where userid = ?";
     public static final String UPDATE_USER_SQL = "update user set name = :name, login = :login where userid = :userid";
 
     public static final String SELECT_USER_BY_LOGIN_SQL = "select userid, login, name from USER where LCASE(login) = ?";
