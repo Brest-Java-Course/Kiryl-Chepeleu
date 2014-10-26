@@ -56,4 +56,6 @@ public class UserServiceImplTest {
         User user = userService.getUserByLogin(ADMIN);
         Assert.assertEquals(ADMIN, user.getLogin());
     }
+
+    
 }
