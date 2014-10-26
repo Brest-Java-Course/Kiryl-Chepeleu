@@ -1,25 +1,52 @@
 package com.epam.brest.courses.domain;
 
-public class User{
-	private long userId;
-	private String login;
-	private String userName;
-	public long getUserId(){
+public class User {
+
+	private Long userId;
+
+    private String login;
+
+    private String name;
+
+    public User() {
+    }
+
+    public User(Long userId, String login, String name) {
+        this.userId = userId;
+        this.login = login;
+        this.name = name;
+    }
+
+    public Long getUserId() {
 		return userId;
 	}
-	public String getLogin(){
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getLogin() {
 		return login;
 	}
-	public String getUserName(){
-		return userName;
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
-	public void setUserId(long userId){
-		this.userId=userId;
+
+	public String getName() {
+		return name;
 	}
-	public void setLogin(String login){
-		this.login=login;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setUserName(String userName){
-		this.userName=userName;
-	}
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
