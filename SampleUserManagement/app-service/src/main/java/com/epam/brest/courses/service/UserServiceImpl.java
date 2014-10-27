@@ -39,10 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByLogin(String login) {
         User user = null;
+        LOGGER.debug("getUserByLogin({})",login);
         try {
             user = userDao.getUserByLogin(login);
         } catch (EmptyResultDataAccessException e) {
-            LOGGER.debug("EmptyResultDataAccessException");
+            LOGGER.error("getUserByLogin({})",login);
         }
         return user;
     }
