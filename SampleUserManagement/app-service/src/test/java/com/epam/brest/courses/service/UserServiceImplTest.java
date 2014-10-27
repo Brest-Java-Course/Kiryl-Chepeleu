@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 public class UserServiceImplTest {
 
     public static final String ADMIN = "admin";
+    public static final String TESTLOGIN_USER = "testloginUser";
 
     @Autowired
     private UserService userService;
@@ -52,10 +53,8 @@ public class UserServiceImplTest {
 
     @Test
     public void testAddUser() throws Exception {
-        userService.addUser(new User(null, ADMIN, ADMIN));
-        User user = userService.getUserByLogin(ADMIN);
-        Assert.assertEquals(ADMIN, user.getLogin());
+        userService.addUser(new User(null, TESTLOGIN_USER, TESTLOGIN_USER));
+        User user = userService.getUserByLogin(TESTLOGIN_USER);
+        Assert.assertEquals(TESTLOGIN_USER, user.getLogin());
     }
-
-    
 }

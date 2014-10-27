@@ -49,6 +49,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUser(Long userId) {
+        User user = userDao.getUserById(userId);
+        Assert.isTrue(!user.getLogin().equals("login"));
         LOGGER.debug("removeUser(userId={}) ", userId);
         userDao.removeUser(userId);
     }
@@ -61,6 +63,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        User oldUser = userDao.getUserById(user.getUserId());
+        if(oldUser.getLogin().equals("login")) {
+            Assert.isTrue(oldUser.getLogin().equals(user.getLogin()));
+            Assert.isTrue(oldUser.getUserId().equals(user.getUserId()));
+        }
         LOGGER.debug("updateUser(user={}) ", user);
         userDao.updateUser(user);
     }
