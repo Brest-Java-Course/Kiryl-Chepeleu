@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /**
- * Created by kirill
+ * Created by kirill on 27.10.14.
  */
 public class UserDaoImpl implements UserDao {
 

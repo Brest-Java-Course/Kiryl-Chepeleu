@@ -4,7 +4,7 @@ import com.epam.brest.courses.domain.User;
 
 import java.util.List;
 /**
- * Created by kirill
+ * Created by kirill on 27.10.14.
  */
 public interface UserDao {
 

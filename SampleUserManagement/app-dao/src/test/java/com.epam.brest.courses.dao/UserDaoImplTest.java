@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 /**
- * Created by kirill
+ * Created by kirill on 27.10.14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/testApplicationContextSpring.xml" })
