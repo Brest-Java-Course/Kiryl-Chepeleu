@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Created by kirill
+ */
 public class UserDaoImpl implements UserDao {
 
     public static final String ADD_NEW_USER_SQL = "insert into USER (userid, login, name) values (:userid, :login, :name)";

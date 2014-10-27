@@ -1,5 +1,7 @@
 package com.epam.brest.courses.domain;
-
+/**
+ * Created by kirill
+ */
 public class User {
 
 	private Long userId;

@@ -12,7 +12,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.*;
-
+/**
+ * Created by kirill
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/testServiceApplicationContextSpring.xml" })
 @TransactionConfiguration(transactionManager="transactionManager", defaultRollback=false)
