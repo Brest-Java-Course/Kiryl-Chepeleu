@@ -9,9 +9,6 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-/**
- * Created by mentee-42 on 24.10.14.
- */
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LogManager.getLogger();
