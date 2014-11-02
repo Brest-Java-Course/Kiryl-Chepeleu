@@ -14,7 +14,8 @@ import static org.junit.Assert.*;
  * Created by kirill on 27.10.14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/testApplicationContextSpring.xml" })
+//@ContextConfiguration(locations = { "classpath:/testApplicationContextSpring.xml" })
+@ContextConfiguration(locations = { "classpath:/spring-dao-test.xml" })
 public class UserDaoImplTest {
 
     @Autowired
@@ -33,7 +34,7 @@ public class UserDaoImplTest {
         int sizeBefore = users.size();
 
         User user = new User();
-        user.setUserId(10L);
+        //user.setUserId(10L);
         user.setLogin("userLogin10");
         user.setName("userName10");
 
@@ -48,7 +49,7 @@ public class UserDaoImplTest {
         int sizeBefore = users.size();
 
         User user = new User();
-        user.setUserId(4L);
+        //user.setUserId(4L);
         user.setLogin("userLogin4");
         user.setName("userName4");
         userDao.addUser(user);
@@ -62,24 +63,19 @@ public class UserDaoImplTest {
         List<User> users = userDao.getUsers();
 
         User user = new User();
-        user.setUserId(5L);
+        //user.setUserId(5L);
         user.setLogin("userLogin5");
         user.setName("userName5");
         userDao.addUser(user);
         User userGetted = userDao.getUserByLogin(user.getLogin());
         assertNotNull(userGetted);
-        assertEquals(userGetted.getUserId(), user.getUserId());
+        assertEquals(userGetted.getLogin(), user.getLogin());
         assertEquals(userGetted.getName(), user.getName());
     }
     @Test
     public void getUserById(){
         List<User> users = userDao.getUsers();
-
-        User user = new User();
-        user.setUserId(6L);
-        user.setLogin("userLogin6");
-        user.setName("userName6");
-        userDao.addUser(user);
+        User user = new User(2L,"userLogin1","userName1");
         User userGetted = userDao.getUserById(user.getUserId());
         assertNotNull(userGetted);
         assertEquals(userGetted.getLogin(), user.getLogin());
@@ -88,17 +84,18 @@ public class UserDaoImplTest {
 
     @Test
     public void updateUser(){
-        List<User> users = userDao.getUsers();
-        int sizeBefore = users.size();
 
+        List<User> users = userDao.getUsers();
         User user = new User();
-        user.setUserId(7L);
+
         user.setLogin("userLogin7");
         user.setName("userName7");
         userDao.addUser(user);
-        user=new User(7L,"newlogin","newname");
+        user=userDao.getUserByLogin("userLogin7");
+        user.setLogin("newLogin7");
+        user.setName("newName7");
         userDao.updateUser(user);
-        User userGetted = userDao.getUserById(7L);
+        User userGetted = userDao.getUserByLogin(user.getLogin());
         assertNotNull(userGetted);
         assertEquals(userGetted.getLogin(), user.getLogin());
         assertEquals(userGetted.getName(), user.getName());
