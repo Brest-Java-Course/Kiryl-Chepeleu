@@ -22,15 +22,20 @@ public class UserDaoImpl implements UserDao {
     @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${insert_into_user_path}')).file)}")
     public String addNewUserSql;
 
-    public static final String ADD_NEW_USER_SQL = "insert into USER (userid, login, name) values (:userid, :login, :name)";
+    @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${delete_user_path}')).file)}")
+    public String deleteUserSql;
 
+    @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${update_user_path}')).file)}")
+    public String updateUserSql;
 
-    public static final String DELETE_USER_SQL = "delete from USER where userid = ?";
-    public static final String UPDATE_USER_SQL = "update user set name = :name, login = :login where userid = :userid";
+    @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${select_user_by_login_path}')).file)}")
+    public String selectUserByLoginSql;
 
-    public static final String SELECT_USER_BY_LOGIN_SQL = "select userid, login, name from USER where LCASE(login) = ?";
-    public static final String SELECT_ALL_USERS_SQL = "select userid, login, name from USER";
-    public static final String SELECT_USER_BY_ID_SQL = "select userid, login, name from USER where userid = ?";
+    @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${select_user_by_id_path}')).file)}")
+    public String selectUserByIdSql;
+
+    @Value("#{T(org.apache.commons.io.FileUtils).readFileToString((new org.springframework.core.io.ClassPathResource('${select_all_user_path}')).file)}")
+    public String selectAllUserSql;
 
     public static final String USER_ID = "userid";
     public static final String LOGIN = "login";
@@ -57,33 +62,33 @@ public class UserDaoImpl implements UserDao {
         parameters.put(NAME, user.getName());
         parameters.put(LOGIN, user.getLogin());
         parameters.put(USER_ID, user.getUserId());
-        namedJdbcTemplate.update(ADD_NEW_USER_SQL, parameters);
+        namedJdbcTemplate.update(addNewUserSql, parameters);
     }
 
     @Override
     public List<User> getUsers() {
         LOGGER.debug("get users()");
-        return jdbcTemplate.query(SELECT_ALL_USERS_SQL, new UserMapper());
+        return jdbcTemplate.query(selectAllUserSql, new UserMapper());
     }
 
     @Override
     public void removeUser(Long userId) {
         LOGGER.debug("removeUser(userId={}) ", userId);
-        jdbcTemplate.update(DELETE_USER_SQL, userId);
+        jdbcTemplate.update(deleteUserSql, userId);
     }
 
 
     @Override
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserByLogin(login={})", login);
-        return jdbcTemplate.queryForObject(SELECT_USER_BY_LOGIN_SQL,
+        return jdbcTemplate.queryForObject(selectUserByLoginSql,
                 new String[]{login.toLowerCase()}, new UserMapper());
     }
 
     @Override
     public User getUserById(long userId) {
         LOGGER.debug("getUserById(userId={})", userId);
-        return jdbcTemplate.queryForObject(SELECT_USER_BY_ID_SQL,
+        return jdbcTemplate.queryForObject(selectUserByIdSql,
                 new UserMapper(), userId);
     }
 
@@ -95,7 +100,7 @@ public class UserDaoImpl implements UserDao {
         parameters.put(NAME, user.getName());
         parameters.put(LOGIN, user.getLogin());
         parameters.put(USER_ID, user.getUserId());
-        namedJdbcTemplate.update(UPDATE_USER_SQL, parameters);
+        namedJdbcTemplate.update(updateUserSql, parameters);
 
     }
 
