@@ -34,7 +34,6 @@ public class UserServiceImplMockTest {
     public void addUser() {
         User user = UserDataFixture.getNewUser();
 
-
         Long id = userDao.addUser(user);
         expectLastCall().andReturn(null);
 
