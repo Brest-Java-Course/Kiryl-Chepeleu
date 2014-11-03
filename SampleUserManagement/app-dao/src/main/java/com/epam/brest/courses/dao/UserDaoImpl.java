@@ -4,9 +4,13 @@ import com.epam.brest.courses.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.Assert;
 
 import javax.sql.DataSource;
@@ -52,17 +56,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addUser(User user) {
+    public Long addUser(User user) {
         LOGGER.debug("addUser({}) ", user);
         Assert.notNull(user);
         Assert.isNull(user.getUserId());
         Assert.notNull(user.getLogin(), "User login should be specified.");
         Assert.notNull(user.getName(), "User name should be specified.");
-        Map<String, Object> parameters = new HashMap(3);
-        parameters.put(NAME, user.getName());
-        parameters.put(LOGIN, user.getLogin());
-        parameters.put(USER_ID, user.getUserId());
-        namedJdbcTemplate.update(addNewUserSql, parameters);
+
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
+        mapSqlParameterSource.addValue(NAME, user.getName());
+        mapSqlParameterSource.addValue(LOGIN, user.getLogin());
+        mapSqlParameterSource.addValue(USER_ID, user.getUserId());
+
+        namedJdbcTemplate.update(addNewUserSql, mapSqlParameterSource,keyHolder);
+        return keyHolder.getKey().longValue();
     }
 
     @Override
