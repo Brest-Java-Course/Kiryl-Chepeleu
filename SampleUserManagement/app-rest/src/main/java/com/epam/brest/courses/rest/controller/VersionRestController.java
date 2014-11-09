@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by kirill on 3.11.14.
  */
 @Controller
-@RequestMapping("/version")
+@RequestMapping(value = "/version", method= RequestMethod.GET)
 public class VersionRestController {
     @ResponseBody
     @RequestMapping(method= RequestMethod.GET)
