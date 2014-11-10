@@ -5,13 +5,15 @@ import com.epam.brest.courses.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
-/**
- * Created by kirill
- */
 
+/**
+ * Created by kirill on 24.10.14.
+ */
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Long addUser(User user) {
         Assert.notNull(user);
         Assert.isNull(user.getUserId());
@@ -37,45 +40,43 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional
     public User getUserByLogin(String login) {
+        LOGGER.debug("getUserByLogin({}) ", login);
         User user = null;
-        LOGGER.debug("getUserByLogin({})",login);
         try {
             user = userDao.getUserByLogin(login);
         } catch (EmptyResultDataAccessException e) {
-            LOGGER.error("getUserByLogin({})",login);
+            LOGGER.error("getUserByLogin({}) ", login);
         }
         return user;
     }
 
     @Override
-    public void removeUser(Long userId) {
-        User user = userDao.getUserById(userId);
-        Assert.isTrue(!user.getLogin().equals("login"));
-        LOGGER.debug("removeUser(userId={}) ", userId);
-        userDao.removeUser(userId);
-    }
-
-    @Override
+    @Transactional
     public User getUserById(long userId) {
-        LOGGER.debug("getUserById(userId={}) ", userId);
+        LOGGER.debug("getUserById({})",userId);
         return userDao.getUserById(userId);
     }
 
     @Override
+    @Transactional
+    public List<User> getUsers() {
+        LOGGER.debug("get users()");
+        return userDao.getUsers();
+    }
+
+    @Override
+    @Transactional
     public void updateUser(User user) {
-        User oldUser = userDao.getUserById(user.getUserId());
-        if(oldUser.getLogin().equals("login")) {
-            Assert.isTrue(oldUser.getLogin().equals(user.getLogin()));
-            Assert.isTrue(oldUser.getUserId().equals(user.getUserId()));
-        }
-        LOGGER.debug("updateUser(user={}) ", user);
+        LOGGER.debug("updateUser({})",user);
         userDao.updateUser(user);
     }
 
     @Override
-    public List<User> getUsers() {
-        LOGGER.debug("getUsers()");
-        return userDao.getUsers();
+    @Transactional
+    public void removeUser(Long userId) {
+        LOGGER.debug("removeUser({})",userId);
+        userDao.removeUser(userId);
     }
 }
