@@ -5,7 +5,7 @@ package com.epam.brest.courses.domain;
  */
 public class Course {
     private Long courseId;
-    private Long lectorId;
+    private Long lecturerId;
     private Long hours;
     private Long listeners;
 
@@ -26,11 +26,11 @@ public class Course {
     }
 
     public Long getLectorId() {
-        return lectorId;
+        return lecturerId;
     }
 
     public void setLectorId(Long lectorId) {
-        this.lectorId = lectorId;
+        this.lecturerId = lectorId;
     }
 
     public Long getHours() {

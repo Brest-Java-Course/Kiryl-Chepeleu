@@ -1,20 +1,20 @@
 package com.epam.brest.courses.domain;
 import org.junit.Before;
-import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 /**
  * Created by kirill-good on 12/6/14.
  */
 public class LectorTest {
-    Lector lector;
+    Lecturer lecturer;
     @Before
     public void setUp()throws Exception{
-        lector = new Lector();
+        lecturer = new Lecturer();
     }
 
     public void testSetGetName()throws Exception{
         final String lectorname = "lectorname";
-        lector.setLectorName(lectorname);
-        assertEquals(lectorname,lector.getLectorName());
+        lecturer.setLectorName(lectorname);
+        assertEquals(lectorname,lecturer.getLectorName());
     }
 }
