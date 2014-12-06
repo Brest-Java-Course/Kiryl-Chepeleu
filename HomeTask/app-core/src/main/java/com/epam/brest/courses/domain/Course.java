@@ -1,5 +1,7 @@
 package com.epam.brest.courses.domain;
 
+import java.sql.Date;
+
 /**
  * Created by kirill-good on 11/29/14.
  */
@@ -8,7 +10,7 @@ public class Course {
     private Long lecturerId;
     private Long hours;
     private Long listeners;
-
+    private Date startdate;
     public String getCourseName() {
         return courseName;
     }

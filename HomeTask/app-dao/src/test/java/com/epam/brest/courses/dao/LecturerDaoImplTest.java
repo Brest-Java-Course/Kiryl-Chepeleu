@@ -40,10 +40,10 @@ public class LecturerDaoImplTest {
     }
 
     @Test
-    public void removeUser() {
+    public void removeLecturer() {
         Lecturer lecturer=new Lecturer(null,"name");
         Long id=lecturerDao.addLector(lecturer);
-        lecturerDao.removeUser(id);
+        lecturerDao.removeLecturer(id);
         List<Lecturer> lecturers = lecturerDao.getLecturers();
         assertNotNull(lecturers);
         for(Lecturer i:lecturers){
@@ -67,5 +67,16 @@ public class LecturerDaoImplTest {
         assertNotNull(resLecturer);
         assertEquals(resLecturer.getLectorId(),id);
         assertEquals(resLecturer.getLectorName(),lecturer.getLectorName());
+    }
+
+    @Test
+    public void updateLecturer(){
+        Lecturer lecturer=new Lecturer(null,"name3");
+        Long id=lecturerDao.addLector(lecturer);
+        Lecturer toUpdatlecturer = new Lecturer(id,"name31");
+        lecturerDao.updateLecturer(toUpdatlecturer);
+        Lecturer resLecturer = lecturerDao.getLecturerById(id);
+        assertEquals(resLecturer.getLectorName(),toUpdatlecturer.getLectorName());
+
     }
 }

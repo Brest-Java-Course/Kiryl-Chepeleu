@@ -1,5 +1,6 @@
 package com.epam.brest.courses.dao;
 
+import com.epam.brest.courses.domain.Course;
 import com.epam.brest.courses.domain.Lecturer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,10 +20,10 @@ import java.util.Map;
 /**
  * Created by kirill-good on 12/6/14.
  */
-public class LecturerDaoImpl implements LecturerDao {
+public class CourseDaoImpl implements CourseDao {
 
-    public static final String LECTURERNAME = "lecturername";
-    public static final String LECTURERID = "lecturerid";
+    public static final String COURSENAME = "coursename";
+    public static final String COURSEID = "courseid";
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;
     public void setDataSource(DataSource dataSource) {
@@ -31,44 +32,42 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Long addLector(Lecturer lector) {
-        Assert.notNull(lector);
-        Assert.isNull(lector.getLectorId());
-        Assert.notNull(lector.getLectorName(), "Lecturer name should be specified.");
+    public Long addCourse(Course course) {
+        /*Assert.notNull(course);
+        Assert.isNull(course.getLectorId());
+        Assert.notNull(course.getCourseName(), "Course name should be specified.");
         Map<String, Object> parameters = new HashMap(3);
-        parameters.put("lecturername", lector.getLectorName());
-        parameters.put("lecturerid", lector.getLectorId());
+        parameters.put(COURSENAME, course.getCourseName());
+        parameters.put(COURSEID, course.getCourseId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedJdbcTemplate.update("insert into LECTURER (lecturerid, lecturername) values (:lecturerid, :lecturername)", new MapSqlParameterSource(parameters), keyHolder);
-        return keyHolder.getKey().longValue();
+        return keyHolder.getKey().longValue();*/
+        return null;
     }
 
     @Override
-    public List<Lecturer> getLecturers() {
-        return jdbcTemplate.query("select lecturerid, lecturername from LECTURER", new UserMapper());
+    public List<Course> getCourses() {
+        return null;
     }
 
     @Override
-    public void removeLecturer(Long userId) {
-        jdbcTemplate.update("delete from LECTURER where lecturerid = ?", userId);
+    public void removeCourse(Long courseId) {
+
     }
 
     @Override
-    public Lecturer getLecturerByName(String lecturerName) {
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturername = ?",new String[]{lecturerName}, new UserMapper());
+    public Lecturer getCourseByName(String courseName) {
+        return null;
     }
 
     @Override
-    public Lecturer getLecturerById(Long lecturerId) {
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturerid = ?", new String[]{String.valueOf(lecturerId)}, new UserMapper());
+    public Lecturer getCourseById(Long courseId) {
+        return null;
     }
 
     @Override
-    public void updateLecturer(Lecturer lecturer) {
-        Map<String, Object> parameters = new HashMap(3);
-        parameters.put(LECTURERNAME, lecturer.getLectorName());
-        parameters.put(LECTURERID, lecturer.getLectorId());
-        namedJdbcTemplate.update("update LECTURER set lecturername = :lecturername where lecturerid = :lecturerid", parameters);
+    public void updateCourse(Course course) {
+
     }
 
     public class UserMapper implements RowMapper<Lecturer> {
@@ -79,5 +78,4 @@ public class LecturerDaoImpl implements LecturerDao {
             return lecturer;
         }
     }
-
 }

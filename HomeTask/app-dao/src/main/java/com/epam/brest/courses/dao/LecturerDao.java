@@ -10,7 +10,7 @@ import java.util.List;
 public interface LecturerDao {
     public Long addLector(Lecturer lector);
     public List<Lecturer> getLecturers();
-    public void removeUser(Long userId);
+    public void removeLecturer(Long userId);
     public Lecturer getLecturerByName(String lecturerName);
     public Lecturer getLecturerById(Long lecturerId);
     public void updateLecturer(Lecturer lecturer);
