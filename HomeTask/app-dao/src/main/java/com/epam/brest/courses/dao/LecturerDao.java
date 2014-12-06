@@ -11,7 +11,7 @@ public interface LecturerDao {
     public Long addLector(Lecturer lector);
     public List<Lecturer> getLecturers();
     public void removeUser(Long userId);
-    public Lecturer getLecturerName(String name);
-    public Lecturer getLecturerById(long userId);
-    public void updateUser(Lecturer lecturer);
+    public Lecturer getLecturerByName(String lecturerName);
+    public Lecturer getLecturerById(Long lecturerId);
+    public void updateLecturer(Lecturer lecturer);
 }

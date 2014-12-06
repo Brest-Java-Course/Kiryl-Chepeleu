@@ -21,7 +21,15 @@ public class Lecturer {
     }
 
     private Long lectorId;
+
+
+
     private String lectorName;
+    public Lecturer(){
 
-
+    }
+    public Lecturer(Long lectorId, String lectorName) {
+        this.lectorId = lectorId;
+        this.lectorName = lectorName;
+    }
 }

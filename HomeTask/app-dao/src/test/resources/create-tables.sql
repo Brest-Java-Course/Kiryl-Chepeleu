@@ -1,0 +1,4 @@
+CREATE TABLE LECTURER (
+lecturerid BIGINT IDENTITY,
+lecturername VARCHAR(255) NOT NULL
+);
