@@ -21,7 +21,7 @@ public class LecturerDaoImplTest {
     private LecturerDao lecturerDao;
 
     @Test
-    public void addUser() {
+    public void addLecturer() {
         List<Lecturer> lecturers= lecturerDao.getLecturers();
         int sizeBefore = lecturers.size();
         Lecturer lecturer= new Lecturer();
@@ -33,10 +33,10 @@ public class LecturerDaoImplTest {
     }
 
     @Test
-    public void getUsers() {
+    public void getLecturers() {
         List<Lecturer> lecturers = lecturerDao.getLecturers();
         assertNotNull(lecturers);
-
+        assertFalse(lecturers.isEmpty());
     }
 
     @Test

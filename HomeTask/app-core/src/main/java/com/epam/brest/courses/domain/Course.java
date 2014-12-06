@@ -7,10 +7,44 @@ import java.sql.Date;
  */
 public class Course {
     private Long courseId;
+    private String courseName;
     private Long lecturerId;
     private Long hours;
     private Long listeners;
     private Date startdate;
+
+    public Course(Long courseId, String courseName, Long lecturerId, Long hours, Long listeners, Date startdate) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.lecturerId = lecturerId;
+        this.hours = hours;
+        this.listeners = listeners;
+        this.startdate = startdate;
+    }
+    public Course(){
+
+    }
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", lecturerId=" + lecturerId +
+                ", hours=" + hours +
+                ", listeners=" + listeners +
+                ", startdate=" + startdate +
+                ", courseId=" + courseId +
+                '}';
+    }
+
+    public Date getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
+    }
+
+
     public String getCourseName() {
         return courseName;
     }
@@ -27,11 +61,11 @@ public class Course {
         this.courseId = courseId;
     }
 
-    public Long getLectorId() {
+    public Long getLecturerId() {
         return lecturerId;
     }
 
-    public void setLectorId(Long lectorId) {
+    public void setLecturerId(Long lectorId) {
         this.lecturerId = lectorId;
     }
 
@@ -51,5 +85,5 @@ public class Course {
         this.listeners = listeners;
     }
 
-    private String courseName;
+
 }

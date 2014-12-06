@@ -45,22 +45,22 @@ public class LecturerDaoImpl implements LecturerDao {
 
     @Override
     public List<Lecturer> getLecturers() {
-        return jdbcTemplate.query("select lecturerid, lecturername from LECTURER", new UserMapper());
+        return jdbcTemplate.query("select lecturerid, lecturername from LECTURER", new LecturerMapper());
     }
 
     @Override
-    public void removeLecturer(Long userId) {
-        jdbcTemplate.update("delete from LECTURER where lecturerid = ?", userId);
+    public void removeLecturer(Long lecturerId) {
+        jdbcTemplate.update("delete from LECTURER where lecturerid = ?", lecturerId);
     }
 
     @Override
     public Lecturer getLecturerByName(String lecturerName) {
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturername = ?",new String[]{lecturerName}, new UserMapper());
+        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturername = ?",new String[]{lecturerName}, new LecturerMapper());
     }
 
     @Override
     public Lecturer getLecturerById(Long lecturerId) {
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturerid = ?", new String[]{String.valueOf(lecturerId)}, new UserMapper());
+        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturerid = ?", new String[]{String.valueOf(lecturerId)}, new LecturerMapper());
     }
 
     @Override
@@ -71,7 +71,7 @@ public class LecturerDaoImpl implements LecturerDao {
         namedJdbcTemplate.update("update LECTURER set lecturername = :lecturername where lecturerid = :lecturerid", parameters);
     }
 
-    public class UserMapper implements RowMapper<Lecturer> {
+    public class LecturerMapper implements RowMapper<Lecturer> {
         public Lecturer mapRow(ResultSet rs, int i) throws SQLException {
             Lecturer lecturer= new Lecturer();
             lecturer.setLectorId(rs.getLong("lecturerid"));

@@ -11,8 +11,9 @@ import java.util.List;
 public interface CourseDao {
     public Long addCourse(Course course);
     public List<Course> getCourses();
+    public List<Course> getCoursesByLecturerId(Long lecturerId);
     public void removeCourse(Long courseId);
-    public Lecturer getCourseByName(String courseName);
-    public Lecturer getCourseById(Long courseId);
+    public Course getCourseByName(String courseName);
+    public Course getCourseById(Long courseId);
     public void updateCourse(Course course);
 }
