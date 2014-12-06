@@ -48,13 +48,13 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public List<Course> getCourses() {
-        return getCourses();
+        return courseDao.getCourses();
     }
 
     @Override
     @Transactional
     public List<Course> getCoursesByLecturerId(Long lecturerId) {
-        return getCoursesByLecturerId(lecturerId);
+        return courseDao.getCoursesByLecturerId(lecturerId);
     }
 
     @Override

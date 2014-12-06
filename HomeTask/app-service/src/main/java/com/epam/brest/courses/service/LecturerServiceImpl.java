@@ -22,7 +22,7 @@ public class LecturerServiceImpl implements LecturerService{
     @Autowired
     private LecturerDao lecturerDao;
 
-    public void setUserDao(LecturerDao lecturerDao) {
+    public void setLecturerDao(LecturerDao lecturerDao) {
         this.lecturerDao = lecturerDao;
     }
 
