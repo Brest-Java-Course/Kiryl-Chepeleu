@@ -1,6 +1,7 @@
 package com.epam.brest.courses.web;
-
+import com.epam.brest.courses.domain.Course;
 import com.epam.brest.courses.domain.Lecturer;
+import com.epam.brest.courses.service.CourseService;
 import com.epam.brest.courses.service.LecturerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,16 +18,17 @@ import java.util.List;
  * Created by kirill-good on 12/7/14.
  */
 @Controller
-public class LecturerController {
+public class CourseController {
     @Autowired
-    LecturerService lecturerService;
+    CourseService courseService;
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @RequestMapping("/lecturers")
-    public ModelAndView getListLecturersView() {
-        List<Lecturer> lecturers = lecturerService.getLecturers();
-        LOGGER.debug("lecturers.size = " + lecturers.size());
-        ModelAndView view = new ModelAndView("lecturersList", "lecturers", lecturers);
+    @RequestMapping("/courses")
+    public ModelAndView getListCoursesView() {
+        List<Course> courses= courseService.getCourses();
+        LOGGER.debug("courses.size = " + courses.size());
+        ModelAndView view = new ModelAndView("coursesList", "courses", courses);
+
         return view;
     }
 }
