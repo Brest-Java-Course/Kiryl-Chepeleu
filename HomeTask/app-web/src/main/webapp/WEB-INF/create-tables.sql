@@ -1,0 +1,13 @@
+CREATE TABLE LECTURER (
+lecturerid BIGINT IDENTITY,
+lecturername VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE COURSE (
+courseid BIGINT IDENTITY,
+coursename VARCHAR(255) NOT NULL,
+lecturerid BIGINT NOT NULL,
+hours BIGINT NOT NULL,
+listeners BIGINT NOT NULL,
+startdate DATE NOT NULL
+);
