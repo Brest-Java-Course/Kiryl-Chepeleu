@@ -2,6 +2,7 @@ package com.epam.brest.courses.service;
 
 import com.epam.brest.courses.domain.Course;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -16,5 +17,5 @@ public interface CourseService {
     public Course getCourseByName(String courseName);
     public Course getCourseById(Long courseId);
     public void updateCourse(Course course);
-
+    public List<Course> getCoursesBetweenDates(Date firstDate,Date secondDate);
 }

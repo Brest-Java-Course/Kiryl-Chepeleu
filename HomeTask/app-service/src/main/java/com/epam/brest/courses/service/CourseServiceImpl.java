@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -89,5 +90,10 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public void updateCourse(Course course) {
         courseDao.updateCourse(course);
+    }
+
+    @Override
+    public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
+        return courseDao.getCoursesBetweenDates(firstDate,secondDate);
     }
 }

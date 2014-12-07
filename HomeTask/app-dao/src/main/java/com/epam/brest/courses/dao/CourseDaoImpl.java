@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.Assert;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -59,6 +60,17 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<Course> getCourses() {
         return jdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE", new CourseMapper());
+    }
+
+    @Override
+    public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
+        //TODO
+        Map<String, Object> parameters = new HashMap(2);
+        parameters.put("firstdate", firstDate);
+        parameters.put("seconddate", secondDate);
+        return namedJdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate" +
+                " from COURSE where (startdate >= :firstdate AND startdate <= :seconddate)"
+                , parameters ,new CourseMapper());
     }
 
     @Override

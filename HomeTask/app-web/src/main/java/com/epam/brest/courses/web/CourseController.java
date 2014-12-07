@@ -55,4 +55,18 @@ public class CourseController {
         return "redirect:/courses";
     }
 
+    @RequestMapping("/filter")
+    public String getDeleteLecturer() {
+        return "filterByDate";
+    }
+
+    @RequestMapping("/coursesbetweendates")
+    public ModelAndView getListCoursesBetweenDatesView(@RequestParam("firstdate")Date firstdate,@RequestParam("seconddate")Date seconddate) {
+        List<Course> courses= courseService.getCoursesBetweenDates(firstdate,seconddate);
+
+        LOGGER.debug("courses.size = " + courses.size());
+        ModelAndView view = new ModelAndView("coursesList", "courses", courses);
+
+        return view;
+    }
 }
