@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
     <body>
-
+    <p>
     <form action="coursesbetweendates" method="GET">
         <table>
             <tr><td><label path="firstdate">startdate (format yyyy-mm-dd):</label></td><td><input type="text" name="firstdate"/><br/><td></tr>

@@ -16,7 +16,7 @@
         background: #b0e0e6;
         }
         </style>
-
+        <p>
         <form:form method="get" modelAttribute="lecturers">
         <h1> List of lecturers </h1>
         <ul>

@@ -30,11 +30,10 @@ public class CourseController {
         List<Course> courses= courseService.getCourses();
         LOGGER.debug("courses.size = " + courses.size());
         ModelAndView view = new ModelAndView("coursesList", "courses", courses);
-
         return view;
     }
     @RequestMapping("/submitCourse")
-    public String getInputFormLecturer(@RequestParam("name")String courseName,
+    public String getInputFormCourse(@RequestParam("name")String courseName,
                                        @RequestParam("lecturerid")Long courseLecturerId,
                                        @RequestParam("hours")Long hours,
                                        @RequestParam("listeners")Long listeners,
@@ -48,16 +47,40 @@ public class CourseController {
         courseService.addCourse(course);
         return "redirect:/courses";
     }
+    @RequestMapping("/updateCourse")
+    public String getUpdateCourse(@RequestParam("id")Long id,
+                                     @RequestParam("name")String courseName,
+                                     @RequestParam("lecturerid")Long courseLecturerId,
+                                     @RequestParam("hours")Long hours,
+                                     @RequestParam("listeners")Long listeners,
+                                     @RequestParam("startdate")Date startdate) {
+        Course course = new Course();
+        course.setCourseId(id);
+        course.setStartdate(startdate);
+        course.setCourseName(courseName);
+        course.setLecturerId(listeners);
+        course.setHours(hours);
+        course.setListeners(Long.valueOf(listeners));
+        courseService.updateCourse(course);
+        return "redirect:/courses";
+    }
 
     @RequestMapping("/deleteCourse")
-    public String getDeleteLecturer(@RequestParam("courserid")Long courseid) {
+    public String getDeleteCourse(@RequestParam("courserid")Long courseid) {
         courseService.removeCourse(courseid);
         return "redirect:/courses";
     }
 
     @RequestMapping("/filter")
-    public String getDeleteLecturer() {
+    public String getDeleteCourse() {
         return "filterByDate";
+    }
+
+    @RequestMapping("/updateFormCourse")
+    public ModelAndView getUpdateCourse(@RequestParam("id")Long id) {
+        Course course = courseService.getCourseById(id);
+        ModelAndView view = new ModelAndView("FormCourse", "course", course);
+        return view;
     }
 
     @RequestMapping("/coursesbetweendates")

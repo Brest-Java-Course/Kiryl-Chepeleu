@@ -16,7 +16,7 @@
         background: #b0e0e6;
         }
         </style>
-
+        <p>
         <form:form method="get" modelAttribute="courses">
         <h1> List of courses </h1>
         <ul>
@@ -28,6 +28,7 @@
                     <td>hours</td>
                     <td>listeners</td>
                     <td>startdate</td>
+                    <td></td>
                 </th>
                 <c:forEach items="${courses}" var="ob">
                     <tr>
@@ -40,6 +41,7 @@
                         <td>${ob.hours}</td>
                         <td>${ob.listeners}</td>
                         <td>${ob.startdate}</td>
+                        <td> <a href='<spring:url value="/updateFormCourse" ><spring:param name="id" value="${ob.courseId}" /> </spring:url>'>edit</a> </td>
                     </tr>
                 </c:forEach>
             </table>
