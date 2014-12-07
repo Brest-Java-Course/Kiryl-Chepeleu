@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -31,4 +33,20 @@ public class CourseController {
 
         return view;
     }
+    @RequestMapping("/submitCourse")
+    public String getInputFormLecturer(@RequestParam("name")String courseName,
+                                       @RequestParam("lecturerid")Long courseLecturerId,
+                                       @RequestParam("hours")Long hours,
+                                       @RequestParam("listeners")Long listeners,
+                                       @RequestParam("startdate")Date startdate) {
+        Course course = new Course();
+        course.setStartdate(startdate);
+        course.setCourseName(courseName);
+        course.setLecturerId(listeners);
+        course.setHours(hours);
+        course.setListeners(Long.valueOf(listeners));
+        courseService.addCourse(course);
+        return "redirect:/courses";
+    }
+
 }

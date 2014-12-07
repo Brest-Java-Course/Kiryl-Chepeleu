@@ -38,10 +38,6 @@ public class CourseServiceImpl implements CourseService {
         Assert.notNull(course.getHours(), "Course hours should be specified.");
         Assert.notNull(course.getListeners(), "Course listeners should be specified.");
         Assert.notNull(course.getStartdate(), "Course startdate should be specified.");
-        Course existingCourse = getCourseById(course.getCourseId());
-        if (existingCourse != null) {
-            throw new IllegalArgumentException("Course is present in DB");
-        }
         return courseDao.addCourse(course);
     }
 

@@ -42,5 +42,19 @@
             </table>
         </ul>
         </form:form>
+
+        <p>
+                <form action="submitCourse" method="POST">
+                <table>
+                            <tr><td><label path="name">Name:</label></td><td><input type="text" name="name"/><br/><td></tr>
+                            <tr><td><label path="lecturerid">lecturerid:</label></td><td><input type="text" name="lecturerid"/><br/><td></tr>
+                            <tr><td><label path="hours">hours:</label></td><td><input type="text" name="hours"/><br/><td></tr>
+                            <tr><td><label path="listeners">listeners:</label></td><td><input type="text" name="listeners"/><br/><td></tr>
+                            <tr><td><label path="startdate">startdate (format yyyy-mm-dd):</label></td><td><input type="text" name="startdate"/><br/><td></tr>
+                </table>
+                            <input type="submit" name="Submit" value="Enter">
+
+
+                </form>
     </body>
 </html>

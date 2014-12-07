@@ -32,10 +32,6 @@ public class LecturerServiceImpl implements LecturerService{
         Assert.notNull(lecturer);
         Assert.isNull(lecturer.getLecturerId());
         Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
-        Lecturer existingLecturer = getLecturerById(lecturer.getLecturerId());
-        if (existingLecturer != null) {
-            throw new IllegalArgumentException("Lecturer is present in DB");
-        }
         return lecturerDao.addLector(lecturer);
     }
 
@@ -68,6 +64,7 @@ public class LecturerServiceImpl implements LecturerService{
     @Transactional
     public Lecturer getLecturerById(Long lecturerId) {
         LOGGER.debug("getLecturerById({})",lecturerId);
+        Assert.notNull(lecturerId);
         return lecturerDao.getLecturerById(lecturerId);
     }
 

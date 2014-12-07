@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
@@ -28,5 +29,13 @@ public class LecturerServiceImplTest {
         List<Lecturer> courses = lecturerService.getLecturers();
         assertNotNull(courses);
         assertFalse(courses.isEmpty());
+    }
+
+    @Test
+    public void addLecturer(){
+        Lecturer lecturer = new Lecturer(null,"testnamelecturer13");
+        Long id = lecturerService.addLecturer(lecturer);
+        Lecturer resLecturer = lecturerService.getLecturerById(id);
+        assertEquals(resLecturer.getLecturerName(),lecturer.getLecturerName());
     }
 }

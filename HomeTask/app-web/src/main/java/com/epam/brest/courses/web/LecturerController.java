@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,9 +25,18 @@ public class LecturerController {
 
     @RequestMapping("/lecturers")
     public ModelAndView getListLecturersView() {
+
         List<Lecturer> lecturers = lecturerService.getLecturers();
         LOGGER.debug("lecturers.size = " + lecturers.size());
         ModelAndView view = new ModelAndView("lecturersList", "lecturers", lecturers);
         return view;
     }
+
+    @RequestMapping("/submitLecturer")
+    public String getInputFormLecturer(@RequestParam("name")String lecturerName) {
+        Lecturer lecturer = new Lecturer(null,lecturerName);
+        lecturerService.addLecturer(lecturer);
+        return "redirect:/lecturers";
+    }
+
 }
