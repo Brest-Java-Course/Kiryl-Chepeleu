@@ -93,4 +93,10 @@ public class CourseDaoImplTest {
         assertEquals(resCourse.getStartdate(),toUpdatCourse.getStartdate());
 
     }
+    @Test
+    public void getCoursesBetweenDates(){
+        List<Course> courses= courseDao.getCoursesBetweenDates(new Date(2014-1900,12-1,1),new Date(2014-1900,12-1,31));
+        assertEquals(courses.size(),1);
+        assertEquals(courses.get(0).getCourseId().longValue(), 5L);
+    }
 }
