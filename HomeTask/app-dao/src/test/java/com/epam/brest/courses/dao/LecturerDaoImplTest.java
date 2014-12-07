@@ -26,7 +26,7 @@ public class LecturerDaoImplTest {
         int sizeBefore = lecturers.size();
         Lecturer lecturer= new Lecturer();
 
-        lecturer.setLectorName("Name10");
+        lecturer.setLecturerName("Name10");
         lecturerDao.addLector(lecturer);
         lecturers = lecturerDao.getLecturers();
         assertEquals(sizeBefore, lecturers.size() - 1);
@@ -47,17 +47,17 @@ public class LecturerDaoImplTest {
         List<Lecturer> lecturers = lecturerDao.getLecturers();
         assertNotNull(lecturers);
         for(Lecturer i:lecturers){
-            assertNotEquals(id,i.getLectorId());
+            assertNotEquals(id,i.getLecturerId());
         }
     }
     @Test
     public void getLecturerByName(){
         Lecturer lecturer=new Lecturer(null,"name1");
         Long id=lecturerDao.addLector(lecturer);
-        Lecturer resLecturer = lecturerDao.getLecturerByName(lecturer.getLectorName());
+        Lecturer resLecturer = lecturerDao.getLecturerByName(lecturer.getLecturerName());
         assertNotNull(resLecturer);
-        assertEquals(resLecturer.getLectorId(),id);
-        assertEquals(resLecturer.getLectorName(),lecturer.getLectorName());
+        assertEquals(resLecturer.getLecturerId(),id);
+        assertEquals(resLecturer.getLecturerName(),lecturer.getLecturerName());
     }
     @Test
     public void getLecturerById(){
@@ -65,8 +65,8 @@ public class LecturerDaoImplTest {
         Long id=lecturerDao.addLector(lecturer);
         Lecturer resLecturer = lecturerDao.getLecturerById(id);
         assertNotNull(resLecturer);
-        assertEquals(resLecturer.getLectorId(),id);
-        assertEquals(resLecturer.getLectorName(),lecturer.getLectorName());
+        assertEquals(resLecturer.getLecturerId(),id);
+        assertEquals(resLecturer.getLecturerName(),lecturer.getLecturerName());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class LecturerDaoImplTest {
         Lecturer toUpdatlecturer = new Lecturer(id,"name31");
         lecturerDao.updateLecturer(toUpdatlecturer);
         Lecturer resLecturer = lecturerDao.getLecturerById(id);
-        assertEquals(resLecturer.getLectorName(),toUpdatlecturer.getLectorName());
+        assertEquals(resLecturer.getLecturerName(),toUpdatlecturer.getLecturerName());
 
     }
 }

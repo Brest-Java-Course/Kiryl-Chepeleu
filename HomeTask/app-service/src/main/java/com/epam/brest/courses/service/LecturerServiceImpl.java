@@ -30,9 +30,9 @@ public class LecturerServiceImpl implements LecturerService{
     @Transactional
     public Long addLecturer(Lecturer lecturer) {
         Assert.notNull(lecturer);
-        Assert.isNull(lecturer.getLectorId());
-        Assert.notNull(lecturer.getLectorName(), "Lecturer name should be specified.");
-        Lecturer existingLecturer = getLecturerById(lecturer.getLectorId());
+        Assert.isNull(lecturer.getLecturerId());
+        Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
+        Lecturer existingLecturer = getLecturerById(lecturer.getLecturerId());
         if (existingLecturer != null) {
             throw new IllegalArgumentException("Lecturer is present in DB");
         }

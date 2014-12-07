@@ -4,32 +4,41 @@ package com.epam.brest.courses.domain;
  * Created by kirill-good on 11/29/14.
  */
 public class Lecturer {
-    public Long getLectorId() {
-        return lectorId;
+
+
+    public Long getLecturerId() {
+        return lecturerId;
     }
 
-    public void setLectorId(Long lectorId) {
-        this.lectorId = lectorId;
+    public void setLecturerId(Long lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
-    public String getLectorName() {
-        return lectorName;
+    public String getLecturerName() {
+        return lecturerName;
     }
 
-    public void setLectorName(String lectorName) {
-        this.lectorName = lectorName;
+    public void setLecturerName(String lecturerName) {
+        this.lecturerName = lecturerName;
     }
 
-    private Long lectorId;
+    private Long lecturerId;
 
+    @Override
+    public String toString() {
+        return "Lecturer{" +
+                "lecturerId=" + lecturerId +
+                ", lecturerName=" + lecturerName + '}';
+    }
 
+    public Lecturer(Long lecturerId, String lecturerName) {
+        this.lecturerId = lecturerId;
+        this.lecturerName = lecturerName;
+    }
 
-    private String lectorName;
+    private String lecturerName;
     public Lecturer(){
 
     }
-    public Lecturer(Long lectorId, String lectorName) {
-        this.lectorId = lectorId;
-        this.lectorName = lectorName;
-    }
+
 }

@@ -33,11 +33,11 @@ public class LecturerDaoImpl implements LecturerDao {
     @Override
     public Long addLector(Lecturer lector) {
         Assert.notNull(lector);
-        Assert.isNull(lector.getLectorId());
-        Assert.notNull(lector.getLectorName(), "Lecturer name should be specified.");
+        Assert.isNull(lector.getLecturerId());
+        Assert.notNull(lector.getLecturerName(), "Lecturer name should be specified.");
         Map<String, Object> parameters = new HashMap(3);
-        parameters.put("lecturername", lector.getLectorName());
-        parameters.put("lecturerid", lector.getLectorId());
+        parameters.put("lecturername", lector.getLecturerName());
+        parameters.put("lecturerid", lector.getLecturerId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedJdbcTemplate.update("insert into LECTURER (lecturerid, lecturername) values (:lecturerid, :lecturername)", new MapSqlParameterSource(parameters), keyHolder);
         return keyHolder.getKey().longValue();
@@ -66,16 +66,16 @@ public class LecturerDaoImpl implements LecturerDao {
     @Override
     public void updateLecturer(Lecturer lecturer) {
         Map<String, Object> parameters = new HashMap(3);
-        parameters.put(LECTURERNAME, lecturer.getLectorName());
-        parameters.put(LECTURERID, lecturer.getLectorId());
+        parameters.put(LECTURERNAME, lecturer.getLecturerName());
+        parameters.put(LECTURERID, lecturer.getLecturerId());
         namedJdbcTemplate.update("update LECTURER set lecturername = :lecturername where lecturerid = :lecturerid", parameters);
     }
 
     public class LecturerMapper implements RowMapper<Lecturer> {
         public Lecturer mapRow(ResultSet rs, int i) throws SQLException {
             Lecturer lecturer= new Lecturer();
-            lecturer.setLectorId(rs.getLong("lecturerid"));
-            lecturer.setLectorName(rs.getString("lecturername"));
+            lecturer.setLecturerId(rs.getLong("lecturerid"));
+            lecturer.setLecturerName(rs.getString("lecturername"));
             return lecturer;
         }
     }

@@ -14,7 +14,7 @@ public class LectorTest {
 
     public void testSetGetName()throws Exception{
         final String lectorname = "lectorname";
-        lecturer.setLectorName(lectorname);
-        assertEquals(lectorname,lecturer.getLectorName());
+        lecturer.setLecturerName(lectorname);
+        assertEquals(lectorname,lecturer.getLecturerName());
     }
 }
