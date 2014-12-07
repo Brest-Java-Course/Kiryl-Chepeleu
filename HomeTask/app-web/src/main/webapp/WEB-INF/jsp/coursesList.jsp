@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
     <body>
         <style type="text/css">
@@ -30,7 +31,9 @@
                 </th>
                 <c:forEach items="${courses}" var="ob">
                     <tr>
-                        <td></td>
+                        <td>
+                            <a href='<spring:url value="/deleteCourse" ><spring:param name="courserid" value="${ob.courseId}" /> </spring:url>'>del</a>
+                        </td>
                         <td>${ob.courseId}</td>
                         <td>${ob.courseName}</td>
                         <td>${ob.lecturerId}</td>

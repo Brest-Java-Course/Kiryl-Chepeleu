@@ -38,5 +38,9 @@ public class LecturerController {
         lecturerService.addLecturer(lecturer);
         return "redirect:/lecturers";
     }
-
+    @RequestMapping("/deleteLecturer")
+    public String getDeleteLecturer(@RequestParam("lecturerid")Long lecturerid) {
+        lecturerService.removeLecturer(lecturerid);
+        return "redirect:/lecturers";
+    }
 }

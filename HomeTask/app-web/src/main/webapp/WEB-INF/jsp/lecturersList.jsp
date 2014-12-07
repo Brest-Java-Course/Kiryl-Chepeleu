@@ -27,7 +27,9 @@
                 </th>
                 <c:forEach items="${lecturers}" var="ob">
                     <tr>
-                        <td></td>
+                        <td>
+                            <a href='<spring:url value="/deleteLecturer" ><spring:param name="lecturerid" value="${ob.lecturerId}" /> </spring:url>'>del</a>
+                        </td>
                         <td> ${ob.lecturerId} </td>
                         <td> ${ob.lecturerName} </td>
                     </tr>

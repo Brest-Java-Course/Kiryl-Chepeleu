@@ -49,4 +49,10 @@ public class CourseController {
         return "redirect:/courses";
     }
 
+    @RequestMapping("/deleteCourse")
+    public String getDeleteLecturer(@RequestParam("courserid")Long courseid) {
+        courseService.removeCourse(courseid);
+        return "redirect:/courses";
+    }
+
 }
