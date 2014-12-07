@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
     <body>
+    <a href=".">Home</a><br>
     <p>
     <form action="coursesbetweendates" method="GET">
         <table>

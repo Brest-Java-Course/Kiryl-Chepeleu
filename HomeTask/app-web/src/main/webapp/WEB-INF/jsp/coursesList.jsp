@@ -16,6 +16,7 @@
         background: #b0e0e6;
         }
         </style>
+        <a href=".">Home</a><br>
         <p>
         <form:form method="get" modelAttribute="courses">
         <h1> List of courses </h1>

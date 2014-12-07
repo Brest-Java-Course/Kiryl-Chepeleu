@@ -4,6 +4,10 @@
 <title>Hello World</title>
 </head>
 <body>
-   <h2>${message}</h2>
+   <h2>Velcome!</h2>
+   <a href=".">Home</a><br>
+   <a href="lecturers">Lecturers list</a><br>
+   <a href="courses">Courses list</a><br>
+   <a href="filter">Courses list by data filter</a><br>
 </body>
 </html>
