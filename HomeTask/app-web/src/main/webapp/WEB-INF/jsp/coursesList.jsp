@@ -57,7 +57,7 @@
                             <tr><td><label path="listeners">listeners:</label></td><td><input type="text" name="listeners"/><br/><td></tr>
                             <tr><td><label path="startdate">startdate (format yyyy-mm-dd):</label></td><td><input type="text" name="startdate"/><br/><td></tr>
                 </table>
-                            <input type="submit" name="Submit" value="Enter">
+                            <input type="submit" name="Submit" value="add">
 
 
                 </form>

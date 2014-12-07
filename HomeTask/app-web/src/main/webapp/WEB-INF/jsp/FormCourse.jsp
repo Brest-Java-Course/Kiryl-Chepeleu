@@ -3,8 +3,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
     <body>
-        <form:form action="updateCourse" method="POST" modelAttribute="course">
+        <form action="updateCourse" method="POST" modelAttribute="course">
         <table>
+        <tr>
+            <td><label path="id">Name:</label></td>
+            <td><input type="text" name="id" value="${course.courseId}" /><td>
+        </tr>
         <tr>
             <td><label path="name">Name:</label></td>
             <td><input type="text" name="name" value="${course.courseName}" /><td>
@@ -26,7 +30,7 @@
             <td><input type="text" name="startdate" value="${course.startdate}" /><br/><td>
         </tr>
         </table>
-        <input type="submit" name="Submit" value="Enter">
-        </form:form>
+        <input type="submit" name="Submit">
+        </form>
 </body>
 </html>

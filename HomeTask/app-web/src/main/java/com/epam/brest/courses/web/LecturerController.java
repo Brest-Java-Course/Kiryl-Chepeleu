@@ -43,4 +43,21 @@ public class LecturerController {
         lecturerService.removeLecturer(lecturerid);
         return "redirect:/lecturers";
     }
+
+    @RequestMapping("/updateLecturer")
+    public String getUpdateLecturer(@RequestParam("id")Long id,
+                                  @RequestParam("name")String lecturerName) {
+        Lecturer lecturer = new Lecturer();
+        lecturer.setLecturerId(id);
+        lecturer.setLecturerName(lecturerName);
+        lecturerService.updateLecturer(lecturer);
+        return "redirect:/lecturers";
+    }
+    @RequestMapping("/updateFormLecturer")
+    public ModelAndView getUpdateLecturer(@RequestParam("id")Long id) {
+
+        Lecturer lecturer = lecturerService.getLecturerById(id);
+        ModelAndView view = new ModelAndView("FormLecturer", "lecturer", lecturer);
+        return view;
+    }
 }

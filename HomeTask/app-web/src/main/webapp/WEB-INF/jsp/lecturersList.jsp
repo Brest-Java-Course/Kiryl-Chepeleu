@@ -24,6 +24,7 @@
                 <th>
                     <td>id</td>
                     <td>name</td>
+                    <td></td>
                 </th>
                 <c:forEach items="${lecturers}" var="ob">
                     <tr>
@@ -32,6 +33,7 @@
                         </td>
                         <td> ${ob.lecturerId} </td>
                         <td> ${ob.lecturerName} </td>
+                        <td> <a href='<spring:url value="/updateFormLecturer" ><spring:param name="id" value="${ob.lecturerId}" /> </spring:url>'>edit</a> </td>
                     </tr>
                 </c:forEach>
             </table>
