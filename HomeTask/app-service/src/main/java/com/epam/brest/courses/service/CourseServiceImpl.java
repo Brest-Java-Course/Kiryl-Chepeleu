@@ -39,6 +39,8 @@ public class CourseServiceImpl implements CourseService {
         Assert.notNull(course.getHours(), "Course hours should be specified.");
         Assert.notNull(course.getListeners(), "Course listeners should be specified.");
         Assert.notNull(course.getStartdate(), "Course startdate should be specified.");
+        Assert.isTrue(course.getHours()>0);
+        Assert.isTrue(course.getListeners()>0);
         Course existCourse = getCourseByName(course.getCourseName());
         if(existCourse!=null){
             throw new IllegalArgumentException("Course is present in DB");
@@ -64,6 +66,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public void removeCourse(Long courseId) {
         LOGGER.debug("removeCourse({})"+courseId);
+        Assert.notNull(courseId);
         courseDao.removeCourse(courseId);
     }
 
@@ -71,6 +74,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public Course getCourseByName(String courseName) {
         LOGGER.debug("getCourseByName({}) ", courseName);
+        Assert.notNull(courseName);
         Course course= null;
         try {
             course= courseDao.getCourseByName(courseName);
@@ -97,18 +101,34 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public void updateCourse(Course course) {
         LOGGER.debug("updateCourse({})",course);
+        Assert.notNull(course);
+        Assert.notNull(course.getCourseId());
+        Assert.notNull(course.getCourseName(), "Course name should be specified.");
+        Assert.notNull(course.getLecturerId(), "Course lector id should be specified.");
+        Assert.notNull(course.getHours(), "Course hours should be specified.");
+        Assert.notNull(course.getListeners(), "Course listeners should be specified.");
+        Assert.notNull(course.getStartdate(), "Course startdate should be specified.");
+        Assert.isTrue(course.getHours()>0);
+        Assert.isTrue(course.getListeners()>0);
+        Course existCourse = getCourseById(course.getCourseId());
+        if(existCourse==null){
+            throw new IllegalArgumentException("Course is not present in DB");
+        }
         courseDao.updateCourse(course);
     }
 
     @Override
     public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
         LOGGER.debug("getCoursesBetweenDates({},{})",firstDate,secondDate);
+        Assert.notNull(firstDate);
+        Assert.notNull(secondDate);
         return courseDao.getCoursesBetweenDates(firstDate,secondDate);
     }
 
     @Override
     public Long getHoursByLecturerId(Long lecturerId) {
         LOGGER.debug("getHoursByLecturerId({})",lecturerId);
+        Assert.notNull(lecturerId);
         return courseDao.getHoursByLecturerId(lecturerId);
     }
 }

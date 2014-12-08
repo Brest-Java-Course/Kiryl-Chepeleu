@@ -50,6 +50,7 @@ public class LecturerServiceImpl implements LecturerService{
     @Transactional
     public void removeLecturer(Long lecturerId) {
         LOGGER.debug("removeLecturer({})", lecturerId);
+        Assert.notNull(lecturerId);
         lecturerDao.removeLecturer(lecturerId);
     }
 
@@ -57,6 +58,7 @@ public class LecturerServiceImpl implements LecturerService{
     @Transactional
     public Lecturer getLecturerByName(String lecturerName) {
         LOGGER.debug("getLecturerByName({}) ", lecturerName);
+        Assert.notNull(lecturerName);
         Lecturer lecturer= null;
         try {
             lecturer = lecturerDao.getLecturerByName(lecturerName);
@@ -84,6 +86,9 @@ public class LecturerServiceImpl implements LecturerService{
     @Transactional
     public void updateLecturer(Lecturer lecturer) {
         LOGGER.debug("updateLecturer({})",lecturer);
+        Assert.notNull(lecturer);
+        Assert.notNull(lecturer.getLecturerId());
+        Assert.notNull(lecturer.getLecturerName());
         Lecturer existLecturer = getLecturerById(lecturer.getLecturerId());
         if(existLecturer==null){
             throw new IllegalArgumentException("Lecturer is not present in DB");
@@ -94,6 +99,8 @@ public class LecturerServiceImpl implements LecturerService{
     @Override
     public void getHours(List<Lecturer> lecturers,CourseService courseService) {
         LOGGER.debug("getHours({},{})",lecturers,courseService);
+        Assert.notNull(lecturers);
+        Assert.notNull(courseService);
         for(Lecturer i:lecturers){
             i.setTotalHours(courseService.getHoursByLecturerId(i.getLecturerId()));
         }
