@@ -13,9 +13,11 @@ public interface CourseDao {
     public Long addCourse(Course course);
     public List<Course> getCourses();
     public List<Course> getCoursesBetweenDates(Date firstDate,Date secondDate);
+
     public List<Course> getCoursesByLecturerId(Long lecturerId);
     public void removeCourse(Long courseId);
     public Course getCourseByName(String courseName);
+
     public Course getCourseById(Long courseId);
     public void updateCourse(Course course);
     public Long getHoursByLecturerId(Long lecturerId);

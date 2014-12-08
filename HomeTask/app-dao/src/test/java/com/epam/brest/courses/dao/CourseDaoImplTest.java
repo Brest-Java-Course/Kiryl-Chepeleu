@@ -43,6 +43,16 @@ public class CourseDaoImplTest {
         }
     }
     @Test
+    public void getCourseById() {
+        Course course=new Course(null,"course_name0",4L,1111L,13L,new Date(2014,9,26));
+        Long id=courseDao.addCourse(course);
+        Course resCourse = courseDao.getCourseByName(course.getCourseName());
+        resCourse = courseDao.getCourseById(resCourse.getCourseId());
+        assertNotNull(resCourse);
+        assertEquals(resCourse.getCourseId(),id);
+        assertEquals(resCourse.getCourseName(), course.getCourseName());
+    }
+    @Test
     public void addCourse() {
         List<Course> courses= courseDao.getCourses();
         int sizeBefore = courses.size();
