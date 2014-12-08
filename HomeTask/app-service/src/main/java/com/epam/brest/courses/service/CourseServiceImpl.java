@@ -49,18 +49,21 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public List<Course> getCourses() {
+        LOGGER.debug("getCourses() ");
         return courseDao.getCourses();
     }
 
     @Override
     @Transactional
     public List<Course> getCoursesByLecturerId(Long lecturerId) {
+        LOGGER.debug("getCoursesByLecturerId({})",lecturerId);
         return courseDao.getCoursesByLecturerId(lecturerId);
     }
 
     @Override
     @Transactional
     public void removeCourse(Long courseId) {
+        LOGGER.debug("removeCourse({})"+courseId);
         courseDao.removeCourse(courseId);
     }
 
@@ -93,16 +96,19 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public void updateCourse(Course course) {
+        LOGGER.debug("updateCourse({})",course);
         courseDao.updateCourse(course);
     }
 
     @Override
     public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
+        LOGGER.debug("getCoursesBetweenDates({},{})",firstDate,secondDate);
         return courseDao.getCoursesBetweenDates(firstDate,secondDate);
     }
 
     @Override
     public Long getHoursByLecturerId(Long lecturerId) {
+        LOGGER.debug("getHoursByLecturerId({})",lecturerId);
         return courseDao.getHoursByLecturerId(lecturerId);
     }
 }

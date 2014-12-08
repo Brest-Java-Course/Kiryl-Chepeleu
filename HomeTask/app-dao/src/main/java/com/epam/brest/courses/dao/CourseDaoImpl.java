@@ -2,6 +2,8 @@ package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.domain.Course;
 import com.epam.brest.courses.domain.Lecturer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -29,6 +31,7 @@ public class CourseDaoImpl implements CourseDao {
     public static final String LISTENERS = "listeners";
     public static final String HOURS = "hours";
     public static final String LECTURERID = "lecturerid";
+    private static final Logger LOGGER = LogManager.getLogger();
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;
     public void setDataSource(DataSource dataSource) {
@@ -38,6 +41,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Long addCourse(Course course) {
+        LOGGER.debug("addCourse({})",course);
         Assert.notNull(course);
         Assert.isNull(course.getCourseId());
         Assert.notNull(course.getCourseName(), "Course name should be specified.");
@@ -59,12 +63,13 @@ public class CourseDaoImpl implements CourseDao {
     }
     @Override
     public List<Course> getCourses() {
+        LOGGER.debug("getCourses()");
         return jdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE", new CourseMapper());
     }
 
     @Override
     public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
-        //TODO
+        LOGGER.debug("getCoursesBetweenDates({},{})",firstDate,secondDate);
         Map<String, Object> parameters = new HashMap(2);
         parameters.put("firstdate", firstDate);
         parameters.put("seconddate", secondDate);
@@ -75,26 +80,31 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public List<Course> getCoursesByLecturerId(Long lecturerId) {
+        LOGGER.debug("getCoursesByLecturerId({})",lecturerId);
         return jdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where lecturerid = " + lecturerId, new CourseMapper());
     }
 
     @Override
     public void removeCourse(Long courseId) {
+        LOGGER.debug("removeCourse({})",courseId);
         jdbcTemplate.update("delete from COURSE where courseid = ?", courseId);
     }
 
     @Override
     public Course getCourseByName(String courseName) {
+        LOGGER.debug("getCourseByName({})",courseName);
         return jdbcTemplate.queryForObject("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where coursename = ?",new String[]{courseName}, new CourseMapper());
     }
 
     @Override
     public Course getCourseById(Long courseId) {
+        LOGGER.debug("getCourseById({})",courseId);
         return jdbcTemplate.queryForObject("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where courseid = ?", new String[]{String.valueOf(courseId)}, new CourseMapper());
     }
 
     @Override
     public void updateCourse(Course course) {
+        LOGGER.debug("updateCourse({})",course);
         Map<String, Object> parameters = new HashMap(6);
         parameters.put(COURSEID, course.getCourseId());
         parameters.put(COURSENAME, course.getCourseName());
@@ -113,7 +123,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Long getHoursByLecturerId(Long lecturerId) {
-
+        LOGGER.debug("getHoursByLecturerId({})",lecturerId);
         return jdbcTemplate.queryForLong("select SUM(hours) from COURSE where lecturerid = ?", new String[]{String.valueOf(lecturerId)});
     }
 

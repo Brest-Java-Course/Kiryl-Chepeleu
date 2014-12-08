@@ -1,6 +1,8 @@
 package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.domain.Lecturer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,6 +27,7 @@ public class LecturerDaoImpl implements LecturerDao {
     public static final String LECTURERID = "lecturerid";
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;
+    private static final Logger LOGGER = LogManager.getLogger();
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
         namedJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -32,6 +35,7 @@ public class LecturerDaoImpl implements LecturerDao {
 
     @Override
     public Long addLecturer(Lecturer lecturer) {
+        LOGGER.debug("addLecturer({})",lecturer);
         Assert.notNull(lecturer);
         Assert.isNull(lecturer.getLecturerId());
         Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
@@ -45,26 +49,31 @@ public class LecturerDaoImpl implements LecturerDao {
 
     @Override
     public List<Lecturer> getLecturers() {
+        LOGGER.debug("getLecturers()");
         return jdbcTemplate.query("select lecturerid, lecturername from LECTURER", new LecturerMapper());
     }
 
     @Override
     public void removeLecturer(Long lecturerId) {
+        LOGGER.debug("removeLecturer({})",lecturerId);
         jdbcTemplate.update("delete from LECTURER where lecturerid = ?", lecturerId);
     }
 
     @Override
     public Lecturer getLecturerByName(String lecturerName) {
+        LOGGER.debug("getLecturerByName({}) ", lecturerName);
         return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturername = ?",new String[]{lecturerName}, new LecturerMapper());
     }
 
     @Override
     public Lecturer getLecturerById(Long lecturerId) {
+        LOGGER.debug("getLecturerById({})",lecturerId);
         return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturerid = ?", new String[]{String.valueOf(lecturerId)}, new LecturerMapper());
     }
 
     @Override
     public void updateLecturer(Lecturer lecturer) {
+        LOGGER.debug("updateLecturer({})",lecturer);
         Map<String, Object> parameters = new HashMap(3);
         parameters.put(LECTURERNAME, lecturer.getLecturerName());
         parameters.put(LECTURERID, lecturer.getLecturerId());

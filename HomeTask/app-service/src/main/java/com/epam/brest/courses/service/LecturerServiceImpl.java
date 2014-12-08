@@ -28,6 +28,7 @@ public class LecturerServiceImpl implements LecturerService{
     @Override
     @Transactional
     public Long addLecturer(Lecturer lecturer) {
+        LOGGER.debug("addLecturer({})",lecturer);
         Assert.notNull(lecturer);
         Assert.isNull(lecturer.getLecturerId());
         Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
@@ -41,13 +42,15 @@ public class LecturerServiceImpl implements LecturerService{
     @Override
     @Transactional
     public List<Lecturer> getLecturers() {
+        LOGGER.debug("getLecturers()");
         return lecturerDao.getLecturers();
     }
 
     @Override
     @Transactional
-    public void removeLecturer(Long userId) {
-        lecturerDao.removeLecturer(userId);
+    public void removeLecturer(Long lecturerId) {
+        LOGGER.debug("removeLecturer({})", lecturerId);
+        lecturerDao.removeLecturer(lecturerId);
     }
 
     @Override
@@ -90,6 +93,7 @@ public class LecturerServiceImpl implements LecturerService{
 
     @Override
     public void getHours(List<Lecturer> lecturers,CourseService courseService) {
+        LOGGER.debug("getHours({},{})",lecturers,courseService);
         for(Lecturer i:lecturers){
             i.setTotalHours(courseService.getHoursByLecturerId(i.getLecturerId()));
         }
