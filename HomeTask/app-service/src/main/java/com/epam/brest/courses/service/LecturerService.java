@@ -15,5 +15,5 @@ public interface LecturerService {
     public Lecturer getLecturerByName(String lecturerName);
     public Lecturer getLecturerById(Long lecturerId);
     public void updateLecturer(Lecturer lecturer);
-
+    public void getHours(List<Lecturer> lecturers,CourseService courseService);
 }

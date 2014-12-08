@@ -10,6 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -73,5 +74,12 @@ public class LecturerServiceImpl implements LecturerService{
     public void updateLecturer(Lecturer lecturer) {
         LOGGER.debug("updateLecturer({})",lecturer);
         lecturerDao.updateLecturer(lecturer);
+    }
+
+    @Override
+    public void getHours(List<Lecturer> lecturers,CourseService courseService) {
+        for(Lecturer i:lecturers){
+            i.setTotalHours(courseService.getHoursByLecturerId(i.getLecturerId()));
+        }
     }
 }

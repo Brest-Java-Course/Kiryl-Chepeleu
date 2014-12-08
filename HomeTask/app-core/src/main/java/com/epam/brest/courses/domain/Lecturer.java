@@ -41,4 +41,13 @@ public class Lecturer {
 
     }
 
+    public Long getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(Long totalHours) {
+        this.totalHours = totalHours;
+    }
+
+    private Long totalHours;
 }

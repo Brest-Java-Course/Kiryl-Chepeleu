@@ -25,6 +25,7 @@
                 <th>
                     <td>id</td>
                     <td>name</td>
+                    <td>total hours</td>
                     <td></td>
                 </th>
                 <c:forEach items="${lecturers}" var="ob">
@@ -34,6 +35,7 @@
                         </td>
                         <td> ${ob.lecturerId} </td>
                         <td> ${ob.lecturerName} </td>
+                        <td> ${ob.totalHours} </td>
                         <td> <a href='<spring:url value="/updateFormLecturer" ><spring:param name="id" value="${ob.lecturerId}" /> </spring:url>'>edit</a> </td>
                     </tr>
                 </c:forEach>

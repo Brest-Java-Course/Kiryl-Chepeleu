@@ -1,6 +1,7 @@
 package com.epam.brest.courses.web;
 
 import com.epam.brest.courses.domain.Lecturer;
+import com.epam.brest.courses.service.CourseService;
 import com.epam.brest.courses.service.LecturerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,8 @@ import java.util.List;
 public class LecturerController {
     @Autowired
     LecturerService lecturerService;
+    @Autowired
+    CourseService courseService;
     private static final Logger LOGGER = LogManager.getLogger();
 
     @RequestMapping("/lecturers")
@@ -29,6 +32,7 @@ public class LecturerController {
         List<Lecturer> lecturers = lecturerService.getLecturers();
         LOGGER.debug("lecturers.size = " + lecturers.size());
         ModelAndView view = new ModelAndView("lecturersList", "lecturers", lecturers);
+        lecturerService.getHours(lecturers,courseService);
         return view;
     }
 
