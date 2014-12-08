@@ -58,9 +58,9 @@ public class CourseController {
         course.setCourseId(id);
         course.setStartdate(startdate);
         course.setCourseName(courseName);
-        course.setLecturerId(listeners);
+        course.setLecturerId(courseLecturerId);
         course.setHours(hours);
-        course.setListeners(Long.valueOf(listeners));
+        course.setListeners(listeners);
         courseService.updateCourse(course);
         return "redirect:/courses";
     }

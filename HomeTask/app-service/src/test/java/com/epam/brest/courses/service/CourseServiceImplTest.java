@@ -88,4 +88,14 @@ public class CourseServiceImplTest {
         assertEquals(courses.size(),1);
         assertEquals(courses.get(0).getCourseId().longValue(), 5L);
     }
+    @Test
+    public void getHoursByLecturerId(){
+        List<Course> courses= courseService.getCoursesByLecturerId(3L);
+        long etalon=0;
+        for(Course i:courses){
+            etalon+=i.getHours();
+        }
+        long res = courseService.getHoursByLecturerId(3L);
+        assertEquals(etalon,res);
+    }
 }

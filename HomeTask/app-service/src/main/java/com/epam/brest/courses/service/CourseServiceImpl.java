@@ -96,4 +96,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getCoursesBetweenDates(Date firstDate, Date secondDate) {
         return courseDao.getCoursesBetweenDates(firstDate,secondDate);
     }
+
+    @Override
+    public Long getHoursByLecturerId(Long lecturerId) {
+        return courseDao.getHoursByLecturerId(lecturerId);
+    }
 }

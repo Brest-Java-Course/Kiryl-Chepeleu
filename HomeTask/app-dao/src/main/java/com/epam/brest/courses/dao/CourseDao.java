@@ -18,4 +18,5 @@ public interface CourseDao {
     public Course getCourseByName(String courseName);
     public Course getCourseById(Long courseId);
     public void updateCourse(Course course);
+    public Long getHoursByLecturerId(Long lecturerId);
 }

@@ -111,6 +111,12 @@ public class CourseDaoImpl implements CourseDao {
                 " where courseid = :courseid", parameters);
     }
 
+    @Override
+    public Long getHoursByLecturerId(Long lecturerId) {
+
+        return jdbcTemplate.queryForLong("select SUM(hours) from COURSE where lecturerid = ?", new String[]{String.valueOf(lecturerId)});
+    }
+
     public class CourseMapper implements RowMapper<Course> {
         public Course mapRow(ResultSet rs, int i) throws SQLException {
             Course course= new Course();

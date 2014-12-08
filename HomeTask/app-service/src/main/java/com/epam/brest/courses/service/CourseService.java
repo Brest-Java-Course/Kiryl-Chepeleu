@@ -18,4 +18,5 @@ public interface CourseService {
     public Course getCourseById(Long courseId);
     public void updateCourse(Course course);
     public List<Course> getCoursesBetweenDates(Date firstDate,Date secondDate);
+    public Long getHoursByLecturerId(Long lecturerId);
 }

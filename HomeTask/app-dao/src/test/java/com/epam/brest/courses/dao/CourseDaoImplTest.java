@@ -99,4 +99,14 @@ public class CourseDaoImplTest {
         assertEquals(courses.size(),1);
         assertEquals(courses.get(0).getCourseId().longValue(), 5L);
     }
+    @Test
+    public void getHoursByLecturerId(){
+        List<Course> courses= courseDao.getCoursesByLecturerId(2L);
+        long etalon=0;
+        for(Course i:courses){
+            etalon+=i.getHours();
+        }
+        long res = courseDao.getHoursByLecturerId(2L);
+        assertEquals(etalon,res);
+    }
 }
