@@ -1,7 +1,6 @@
 package com.epam.brest.courses.service;
 
 import com.epam.brest.courses.dao.LecturerDao;
-import com.epam.brest.courses.domain.Course;
 import com.epam.brest.courses.domain.Lecturer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,7 +31,11 @@ public class LecturerServiceImpl implements LecturerService{
         Assert.notNull(lecturer);
         Assert.isNull(lecturer.getLecturerId());
         Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
-        return lecturerDao.addLector(lecturer);
+        Lecturer existLecturer = getLecturerByName(lecturer.getLecturerName());
+        if(existLecturer!=null){
+            throw new IllegalArgumentException("Lecturer is present in DB");
+        }
+        return lecturerDao.addLecturer(lecturer);
     }
 
     @Override
@@ -66,13 +68,23 @@ public class LecturerServiceImpl implements LecturerService{
     public Lecturer getLecturerById(Long lecturerId) {
         LOGGER.debug("getLecturerById({})",lecturerId);
         Assert.notNull(lecturerId);
-        return lecturerDao.getLecturerById(lecturerId);
+        Lecturer lecturer= null;
+        try {
+            lecturer = lecturerDao.getLecturerById(lecturerId);
+        } catch (EmptyResultDataAccessException e) {
+            LOGGER.error("getLecturerById({}) ", lecturerId);
+        }
+        return lecturer;
     }
 
     @Override
     @Transactional
     public void updateLecturer(Lecturer lecturer) {
         LOGGER.debug("updateLecturer({})",lecturer);
+        Lecturer existLecturer = getLecturerById(lecturer.getLecturerId());
+        if(existLecturer==null){
+            throw new IllegalArgumentException("Lecturer is not present in DB");
+        }
         lecturerDao.updateLecturer(lecturer);
     }
 

@@ -31,13 +31,13 @@ public class LecturerDaoImpl implements LecturerDao {
     }
 
     @Override
-    public Long addLector(Lecturer lector) {
-        Assert.notNull(lector);
-        Assert.isNull(lector.getLecturerId());
-        Assert.notNull(lector.getLecturerName(), "Lecturer name should be specified.");
+    public Long addLecturer(Lecturer lecturer) {
+        Assert.notNull(lecturer);
+        Assert.isNull(lecturer.getLecturerId());
+        Assert.notNull(lecturer.getLecturerName(), "Lecturer name should be specified.");
         Map<String, Object> parameters = new HashMap(3);
-        parameters.put("lecturername", lector.getLecturerName());
-        parameters.put("lecturerid", lector.getLecturerId());
+        parameters.put("lecturername", lecturer.getLecturerName());
+        parameters.put("lecturerid", lecturer.getLecturerId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedJdbcTemplate.update("insert into LECTURER (lecturerid, lecturername) values (:lecturerid, :lecturername)", new MapSqlParameterSource(parameters), keyHolder);
         return keyHolder.getKey().longValue();

@@ -27,7 +27,7 @@ public class LecturerDaoImplTest {
         Lecturer lecturer= new Lecturer();
 
         lecturer.setLecturerName("Name10");
-        lecturerDao.addLector(lecturer);
+        lecturerDao.addLecturer(lecturer);
         lecturers = lecturerDao.getLecturers();
         assertEquals(sizeBefore, lecturers.size() - 1);
     }
@@ -42,7 +42,7 @@ public class LecturerDaoImplTest {
     @Test
     public void removeLecturer() {
         Lecturer lecturer=new Lecturer(null,"name");
-        Long id=lecturerDao.addLector(lecturer);
+        Long id=lecturerDao.addLecturer(lecturer);
         lecturerDao.removeLecturer(id);
         List<Lecturer> lecturers = lecturerDao.getLecturers();
         assertNotNull(lecturers);
@@ -53,7 +53,7 @@ public class LecturerDaoImplTest {
     @Test
     public void getLecturerByName(){
         Lecturer lecturer=new Lecturer(null,"name1");
-        Long id=lecturerDao.addLector(lecturer);
+        Long id=lecturerDao.addLecturer(lecturer);
         Lecturer resLecturer = lecturerDao.getLecturerByName(lecturer.getLecturerName());
         assertNotNull(resLecturer);
         assertEquals(resLecturer.getLecturerId(),id);
@@ -62,7 +62,7 @@ public class LecturerDaoImplTest {
     @Test
     public void getLecturerById(){
         Lecturer lecturer=new Lecturer(null,"name2");
-        Long id=lecturerDao.addLector(lecturer);
+        Long id=lecturerDao.addLecturer(lecturer);
         Lecturer resLecturer = lecturerDao.getLecturerById(id);
         assertNotNull(resLecturer);
         assertEquals(resLecturer.getLecturerId(),id);
@@ -72,7 +72,7 @@ public class LecturerDaoImplTest {
     @Test
     public void updateLecturer(){
         Lecturer lecturer=new Lecturer(null,"name3");
-        Long id=lecturerDao.addLector(lecturer);
+        Long id=lecturerDao.addLecturer(lecturer);
         Lecturer toUpdatlecturer = new Lecturer(id,"name31");
         lecturerDao.updateLecturer(toUpdatlecturer);
         Lecturer resLecturer = lecturerDao.getLecturerById(id);

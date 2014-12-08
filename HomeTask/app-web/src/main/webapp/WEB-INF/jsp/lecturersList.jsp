@@ -46,7 +46,7 @@
         <form action="submitLecturer" method="POST">
                     <label path="name">Name:</label>
                     <input type="text" name="name"/><br/>
-                    <input type="submit" name="Submit" value="Enter">
+                    <input type="submit" name="Submit" value="add">
          </form>
     </body>
 </html>

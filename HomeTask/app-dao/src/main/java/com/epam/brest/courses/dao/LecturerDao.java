@@ -8,7 +8,7 @@ import java.util.List;
  * Created by kirill-good on 12/6/14.
  */
 public interface LecturerDao {
-    public Long addLector(Lecturer lector);
+    public Long addLecturer(Lecturer lecturer);
     public List<Lecturer> getLecturers();
     public void removeLecturer(Long userId);
     public Lecturer getLecturerByName(String lecturerName);

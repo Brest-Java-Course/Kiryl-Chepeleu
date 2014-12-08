@@ -71,9 +71,9 @@ public class CourseServiceImplTest {
 
     @Test
     public void updateCourse(){
-        Course course=new Course(null,"course_name2",4L,1111L,13L,new Date(2014,9,26));
+        Course course=new Course(null,"course_name3",4L,1111L,13L,new Date(2014,9,26));
         Long id=courseService.addCourse(course);
-        Course toUpdatCourse = new Course(id,"course_name3",5L,1111L,13L,new Date(2014,9,22));
+        Course toUpdatCourse = new Course(id,"course_name4",5L,1111L,13L,new Date(2014,9,22));
         courseService.updateCourse(toUpdatCourse);
         Course resCourse = courseService.getCourseById(id);
         assertEquals(resCourse.getCourseName(),toUpdatCourse.getCourseName());
