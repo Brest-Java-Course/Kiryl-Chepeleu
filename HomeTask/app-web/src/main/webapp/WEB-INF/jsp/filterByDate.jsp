@@ -10,7 +10,7 @@
             <tr><td><label path="firstdate">startdate (format yyyy-mm-dd):</label></td><td><input type="text" name="firstdate"/><br/><td></tr>
             <tr><td><label path="seconddate">startdate (format yyyy-mm-dd):</label></td><td><input type="text" name="seconddate"/><br/><td></tr>
         </table>
-        <input type="submit" name="Submit" value="Enter">
+        <input type="submit" name="Submit" value="filter">
     </form>
     </body>
 </html>

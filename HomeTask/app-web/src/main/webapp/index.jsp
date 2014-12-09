@@ -8,6 +8,6 @@
    <a href=".">Home</a><br>
    <a href="lecturers">Lecturers list</a><br>
    <a href="courses">Courses list</a><br>
-   <a href="filter">Courses list by data filter</a><br>
+   <a href="filter">Courses list by date filter</a><br>
 </body>
 </html>
