@@ -1,7 +1,6 @@
 package com.epam.brest.courses.dao;
 
 import com.epam.brest.courses.domain.Course;
-import com.epam.brest.courses.domain.Lecturer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,6 +31,15 @@ public class CourseDaoImpl implements CourseDao {
     public static final String HOURS = "hours";
     public static final String LECTURERID = "lecturerid";
     private static final Logger LOGGER = LogManager.getLogger();
+    public static final String SQL_ADD_COURSE = "insert into COURSE (courseid,coursename,lecturerid, hours,listeners,startdate) values (:courseid,:coursename,:lecturerid,:hours,:listeners,:startdate)";
+    public static final String SQL_SELECT_ALL_COURSES = "select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE";
+    public static final String SQL_SELECT_COURSES_BETWEEN_DATES = "select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where (startdate >= :firstdate AND startdate <= :seconddate)";
+    public static final String SQL_SELECT_COURSES_BY_LECTURER_ID = "select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where lecturerid = ";
+    public static final String SQL_DELETE_COURSE_BY_ID = "delete from COURSE where courseid = ?";
+    public static final String SQL_SELECT_COURSES_BY_NAME = "select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where coursename = ?";
+    public static final String SQL_SELECT_COURSE_BY_ID = "select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where courseid = ?";
+    public static final String SQL_UPDATE_COURSE = "update COURSE set lecturerid = :lecturerid, startdate = :startdate, coursename = :coursename, listeners = :listeners, hours = :hours where courseid = :courseid";
+    public static final String SQL_GET_HOURS_BY_LECTURER_ID = "select SUM(hours) from COURSE where lecturerid = ?";
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;
     public void setDataSource(DataSource dataSource) {
@@ -57,14 +65,13 @@ public class CourseDaoImpl implements CourseDao {
         parameters.put(LISTENERS, course.getListeners());
         parameters.put(STARTDATE, course.getStartdate());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedJdbcTemplate.update("insert into COURSE (courseid,coursename,lecturerid, hours,listeners,startdate) " +
-                "values (:courseid,:coursename,:lecturerid,:hours,:listeners,:startdate)", new MapSqlParameterSource(parameters), keyHolder);
+        namedJdbcTemplate.update(SQL_ADD_COURSE, new MapSqlParameterSource(parameters), keyHolder);
         return keyHolder.getKey().longValue();
     }
     @Override
     public List<Course> getCourses() {
         LOGGER.debug("getCourses()");
-        return jdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE", new CourseMapper());
+        return jdbcTemplate.query(SQL_SELECT_ALL_COURSES, new CourseMapper());
     }
 
     @Override
@@ -73,33 +80,32 @@ public class CourseDaoImpl implements CourseDao {
         Map<String, Object> parameters = new HashMap(2);
         parameters.put("firstdate", firstDate);
         parameters.put("seconddate", secondDate);
-        return namedJdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate" +
-                " from COURSE where (startdate >= :firstdate AND startdate <= :seconddate)"
+        return namedJdbcTemplate.query(SQL_SELECT_COURSES_BETWEEN_DATES
                 , parameters ,new CourseMapper());
     }
 
     @Override
     public List<Course> getCoursesByLecturerId(Long lecturerId) {
         LOGGER.debug("getCoursesByLecturerId({})",lecturerId);
-        return jdbcTemplate.query("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where lecturerid = " + lecturerId, new CourseMapper());
+        return jdbcTemplate.query(SQL_SELECT_COURSES_BY_LECTURER_ID + lecturerId, new CourseMapper());
     }
 
     @Override
     public void removeCourse(Long courseId) {
         LOGGER.debug("removeCourse({})",courseId);
-        jdbcTemplate.update("delete from COURSE where courseid = ?", courseId);
+        jdbcTemplate.update(SQL_DELETE_COURSE_BY_ID, courseId);
     }
 
     @Override
     public Course getCourseByName(String courseName) {
         LOGGER.debug("getCourseByName({})",courseName);
-        return jdbcTemplate.queryForObject("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where coursename = ?",new String[]{courseName}, new CourseMapper());
+        return jdbcTemplate.queryForObject(SQL_SELECT_COURSES_BY_NAME, new String[]{courseName}, new CourseMapper());
     }
 
     @Override
     public Course getCourseById(Long courseId) {
         LOGGER.debug("getCourseById({})",courseId);
-        return jdbcTemplate.queryForObject("select courseid,coursename,lecturerid, hours,listeners,startdate from COURSE where courseid = ?", new String[]{String.valueOf(courseId)}, new CourseMapper());
+        return jdbcTemplate.queryForObject(SQL_SELECT_COURSE_BY_ID, new String[]{String.valueOf(courseId)}, new CourseMapper());
     }
 
     @Override
@@ -112,19 +118,13 @@ public class CourseDaoImpl implements CourseDao {
         parameters.put("hours", course.getHours());
         parameters.put("lecturerid", course.getLecturerId());
         parameters.put("startdate", course.getStartdate());
-        namedJdbcTemplate.update("update COURSE set " +
-                " lecturerid = :lecturerid," +
-                " startdate = :startdate," +
-                " coursename = :coursename," +
-                " listeners = :listeners," +
-                " hours = :hours" +
-                " where courseid = :courseid", parameters);
+        namedJdbcTemplate.update(SQL_UPDATE_COURSE, parameters);
     }
 
     @Override
     public Long getHoursByLecturerId(Long lecturerId) {
         LOGGER.debug("getHoursByLecturerId({})",lecturerId);
-        return jdbcTemplate.queryForLong("select SUM(hours) from COURSE where lecturerid = ?", new String[]{String.valueOf(lecturerId)});
+        return jdbcTemplate.queryForLong(SQL_GET_HOURS_BY_LECTURER_ID, new String[]{String.valueOf(lecturerId)});
     }
 
     public class CourseMapper implements RowMapper<Course> {

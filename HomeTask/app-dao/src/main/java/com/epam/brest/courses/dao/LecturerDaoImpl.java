@@ -25,6 +25,12 @@ public class LecturerDaoImpl implements LecturerDao {
 
     public static final String LECTURERNAME = "lecturername";
     public static final String LECTURERID = "lecturerid";
+    public static final String SQL_ADD_LECTURER = "insert into LECTURER (lecturerid, lecturername) values (:lecturerid, :lecturername)";
+    public static final String SQL_SELECT_ALL_LECTURERS = "select lecturerid, lecturername from LECTURER";
+    public static final String SQL_DELETE_LECTURER_BY_ID = "delete from LECTURER where lecturerid = ?";
+    public static final String SQL_SELECT_LECTURERS_BY_NAME = "select lecturerid, lecturername from LECTURER where lecturername = ?";
+    public static final String SQL_SELECT_LECTURERS_BY_ID = "select lecturerid, lecturername from LECTURER where lecturerid = ?";
+    public static final String SQL_UPDATE_LECTURER = "update LECTURER set lecturername = :lecturername where lecturerid = :lecturerid";
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedJdbcTemplate;
     private static final Logger LOGGER = LogManager.getLogger();
@@ -43,32 +49,32 @@ public class LecturerDaoImpl implements LecturerDao {
         parameters.put("lecturername", lecturer.getLecturerName());
         parameters.put("lecturerid", lecturer.getLecturerId());
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedJdbcTemplate.update("insert into LECTURER (lecturerid, lecturername) values (:lecturerid, :lecturername)", new MapSqlParameterSource(parameters), keyHolder);
+        namedJdbcTemplate.update(SQL_ADD_LECTURER, new MapSqlParameterSource(parameters), keyHolder);
         return keyHolder.getKey().longValue();
     }
 
     @Override
     public List<Lecturer> getLecturers() {
         LOGGER.debug("getLecturers()");
-        return jdbcTemplate.query("select lecturerid, lecturername from LECTURER", new LecturerMapper());
+        return jdbcTemplate.query(SQL_SELECT_ALL_LECTURERS, new LecturerMapper());
     }
 
     @Override
     public void removeLecturer(Long lecturerId) {
         LOGGER.debug("removeLecturer({})",lecturerId);
-        jdbcTemplate.update("delete from LECTURER where lecturerid = ?", lecturerId);
+        jdbcTemplate.update(SQL_DELETE_LECTURER_BY_ID, lecturerId);
     }
 
     @Override
     public Lecturer getLecturerByName(String lecturerName) {
         LOGGER.debug("getLecturerByName({}) ", lecturerName);
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturername = ?",new String[]{lecturerName}, new LecturerMapper());
+        return jdbcTemplate.queryForObject(SQL_SELECT_LECTURERS_BY_NAME,new String[]{lecturerName}, new LecturerMapper());
     }
 
     @Override
     public Lecturer getLecturerById(Long lecturerId) {
         LOGGER.debug("getLecturerById({})",lecturerId);
-        return jdbcTemplate.queryForObject("select lecturerid, lecturername from LECTURER where lecturerid = ?", new String[]{String.valueOf(lecturerId)}, new LecturerMapper());
+        return jdbcTemplate.queryForObject(SQL_SELECT_LECTURERS_BY_ID, new String[]{String.valueOf(lecturerId)}, new LecturerMapper());
     }
 
     @Override
@@ -77,7 +83,7 @@ public class LecturerDaoImpl implements LecturerDao {
         Map<String, Object> parameters = new HashMap(3);
         parameters.put(LECTURERNAME, lecturer.getLecturerName());
         parameters.put(LECTURERID, lecturer.getLecturerId());
-        namedJdbcTemplate.update("update LECTURER set lecturername = :lecturername where lecturerid = :lecturerid", parameters);
+        namedJdbcTemplate.update(SQL_UPDATE_LECTURER, parameters);
     }
 
     public class LecturerMapper implements RowMapper<Lecturer> {
