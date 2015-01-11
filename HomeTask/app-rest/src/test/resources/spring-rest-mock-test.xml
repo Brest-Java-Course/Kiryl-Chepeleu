@@ -7,8 +7,18 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-
-
+    <bean id="lecturerDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.courses.dao.LecturerDao"/>
+    </bean>
+    <bean id="lecturerService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.courses.service.LecturerService"/>
+    </bean>
+    <bean id="courseDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.courses.dao.CourseDao"/>
+    </bean>
+    <bean id="courseService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.courses.service.CourseService"/>
+    </bean>
     <context:component-scan base-package="com.epam.brest.courses.rest"/>
 
 </beans>

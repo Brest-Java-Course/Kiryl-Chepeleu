@@ -28,7 +28,9 @@ public class Lecturer {
     public String toString() {
         return "Lecturer{" +
                 "lecturerId=" + lecturerId +
-                ", lecturerName=" + lecturerName + '}';
+                ", lecturerName='" + lecturerName + '\'' +
+                ", totalHours=" + totalHours +
+                '}';
     }
 
     public Lecturer(Long lecturerId, String lecturerName) {
