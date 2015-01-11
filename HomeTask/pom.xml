@@ -10,6 +10,7 @@
         <module>app-core</module>
         <module>app-service</module>
         <module>app-web</module>
+        <module>app-rest</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -22,6 +23,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>app-core</artifactId>
@@ -35,6 +37,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>app-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>app-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
